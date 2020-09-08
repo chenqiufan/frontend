@@ -9,6 +9,10 @@
             <input type="password" id="pwd">
         </p>
         <p>
+            <label for="pwd">确认密码:</label>
+            <input type="password" id="pwd">
+        </p>
+        <p>
             <router-link to="Index"><button v-on="LogIn()">登录</button></router-link>
         </p>
     </div>
