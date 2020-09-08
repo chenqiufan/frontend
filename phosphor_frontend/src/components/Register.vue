@@ -19,13 +19,10 @@
                     <input type="password" name="password2" id="cpwd" v-model="cpwd" @blur="check_cpwd" placeholder="Please confirm your password"/>
                     <span class="error_tip" v-show="error_cpwd" style="color:red;">两次输入的密码不一致</span>
                 </label>
-                <label>
-                    <input type="checkbox" name="allow" id="allow" v-model="allow" @change="check_allow">
-                    <p style="color:black;position: relative;top:-30px;">
-                        同意"陈cc美瞳馆的用户使用协议"
-                    </p> 
-                    <span class="error_tip" v-show="error_allow" style="color:red;">请勾选用户协议</span>
-                </label>
+                <span style="display:inline-block;color:black">
+                    <input style="width:20px;" type="checkbox" name="allow" id="allow" v-model="allow" @change="check_allow">同意"陈cc美瞳馆的用户使用协议"
+                    <span class="error_tip" v-show="error_allow" style="color:red">请勾选用户协议</span>
+                </span>
                 <input type="submit" value="Sign up"/>
                 <p class="change_link" style="text-align: center">
                     <span class="text">Already a member ?</span>
@@ -171,12 +168,6 @@ export default {
         -webkit-transition: all 0s ease-in 0.1ms;
         -moz-transition: all 0s ease-in 0.1ms;
         transition: all 0s ease-in 0.1ms;
-    }
-    .container input[type=checkbox] {
-        left: -140px;
-        position: relative;
-        height: 20px;
-        top:20px;
     }
     .container input[type="text"] , .container input[type="password"]  {
         background-color: #FFFFFF;
