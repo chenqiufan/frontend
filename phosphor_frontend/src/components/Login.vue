@@ -1,5 +1,8 @@
 <template>
     <div>
+        <h1>
+            爱秋秋，爱居居
+        </h1>
         <p>
             <label for="username">用户名:</label>
             <input type="text" id="username">
