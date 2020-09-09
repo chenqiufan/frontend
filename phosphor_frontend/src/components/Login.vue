@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>
-            爱秋秋，爱凡凡
+            爱秋
         </h1>
         <p>
             <label for="username">用户名:</label>
