@@ -2,33 +2,32 @@
     <div class="wrap">
         <div class="container">
             <h1 style="color: white; margin: 0; text-align: center">Sign up</h1>
-            <form @submit="on_submit" v-cloak method="post">
-                <label>
-                    <input type="text" placeholder="Your username" name="username" id="user_name" v-model="username" @blur="check_username"/>
-                    <span class="error_tip" v-show="error_name" style="color:red;">{{ error_name_message }}</span>
-                </label>
-                <label>
-                    <input type="text" placeholder="Your Phone Number" name="mobile" id="phone" v-model="phone" @blur="check_phone"/>
-                    <span class="error_tip" v-show="error_phone" style="color:red;">{{ error_phone_message }}</span>
-                </label>
-                <label>
-                    <input type="password" placeholder="password" name="password" id="pwd" v-model="password" @blur="check_password" />
-                    <span class="error_tip" v-show="error_password" style="color:red;">请输入6-12位的密码</span>
-                </label>
-                <label>
-                    <input type="password" name="password2" id="cpwd" v-model="cpwd" @blur="check_cpwd" placeholder="Please confirm your password"/>
-                    <span class="error_tip" v-show="error_cpwd" style="color:red;">两次输入的密码不一致</span>
-                </label>
-                <span style="display:inline-block;color:black">
-                    <input style="width:20px;" type="checkbox" name="allow" id="allow" v-model="allow" @change="check_allow">同意"陈cc美瞳馆的用户使用协议"
-                    <span class="error_tip" v-show="error_allow" style="color:red">请勾选用户协议</span>
-                </span>
-                <input type="submit" value="Sign up"/>
-                <p class="change_link" style="text-align: center">
-                    <span class="text">Already a member ?</span>
-                    <router-link to="Index"> Go and log in</router-link>
-                </p>
-            </form>
+            <label>
+                <input type="text" placeholder="Your username" name="username" id="user_name" v-model="username" @blur="check_username"/>
+                <span class="error_tip" v-show="error_name" style="color:red;">{{ error_name_message }}</span>
+            </label>
+            <label>
+                <input type="text" placeholder="Your Phone Number" name="mobile" id="phone" v-model="phone" @blur="check_phone"/>
+                <span class="error_tip" v-show="error_phone" style="color:red;">{{ error_phone_message }}</span>
+            </label>
+            <label>
+                <input type="password" placeholder="password" name="password" id="pwd" v-model="password" @blur="check_password" />
+                <span class="error_tip" v-show="error_password" style="color:red;">请输入6-12位的密码</span>
+            </label>
+            <label>
+                <input type="password" name="password2" id="cpwd" v-model="cpwd" @blur="check_cpwd" placeholder="Please confirm your password"/>
+                <span class="error_tip" v-show="error_cpwd" style="color:red;">两次输入的密码不一致</span>
+            </label>
+            <span style="display:inline-block;color:black">
+                <input style="width:20px;" type="checkbox" name="allow" id="allow" v-model="allow" @change="check_allow">同意"陈cc美瞳馆的用户使用协议"
+                <span class="error_tip" v-show="error_allow" style="color:red">请勾选用户协议</span>
+            </span>
+            <!-- <button @click="on_submit()">Sign up</button> -->
+            <input type="submit" value="Sign up" @click="on_submit()"/>
+            <p class="change_link" style="text-align: center">
+                <span class="text">Already a member ?</span>
+                <router-link to="Index"> Go and log in</router-link>
+            </p>
         </div>
         <ul>
             <li></li>
@@ -46,6 +45,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name : "Register",
     data() {
@@ -123,6 +123,19 @@ export default {
             // 全部校验后，注册数据中，只要有错误就禁止提交事件
             if (this.error_name == true || this.error_password == true || this.error_cpwd == true || this.error_phone == true || this.error_allow ==true){
                 window.event.returnValue = false;
+            }else{
+                axios.post('http://127.0.0.1:59003/user_api_v1/register',{
+                    "username":this.username,
+                    "password":this.password,
+                    "password2":this.cpwd,
+                    "phone":this.phone
+                }).then(res=>{
+                    console.log(res);
+                    // if(parseInt(res.status)==200){
+                    //     console.log(1);
+                    //     window.location.href="Index"
+                    // }
+                })
             }
         }
     },
@@ -215,8 +228,7 @@ export default {
         inset -3px -3px 5px rgba(0, 0, 0, .5),
         0 0 20px rgba(255, 255, 255, .75);
         background-color:rgba(255, 255, 255, 0.15);
-        animotion: square 25s infinite;
-        -webkit-animation: square 25s infinite;
+        
     }
     .wrap ul li:nth-child(1) {
         left: 0;

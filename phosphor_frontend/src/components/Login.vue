@@ -1,42 +1,38 @@
 <template>
     <div>
-        <h1>
-            爱秋秋，爱凡凡
-        </h1>
-        <p>
-            <label for="username">用户名:</label>
-            <input type="text" id="username">
-        </p>
-        <p>
-            <label for="pwd">密码:</label>
-            <input type="password" id="pwd">
-        </p>
-        <p>
-            <label for="pwd">确认密码:</label>
-            <input type="password" id="pwd">
-        </p>
-        <p>
-            <router-link to="Index"><button v-on="LogIn()">登录</button></router-link>
-        </p>
+        <input type="text" name="username" v-model="postForm.username">
+        <input type="password" name="password" v-model="postForm.password">
+        <input type="submit" @click="test" value="登录">
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-    name : "Login",
-    methods: {
-        LogIn(){
-            const data = {
-                "name":"zhu jian"
+    name: "Login",
+    data() {
+        return {
+            postForm:{
+                username:'',
+                password:''
             }
-            axios.post('http://127.0.0.1:59003/login',data)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(function (error){
-                console.log(error)
-            })
+        }
+    },
+    methods: {
+        demo(){
+            axios.get('http://127.0.0.1:59003/demo')
+                .then(res=>{
+                    console.log(res)
+                })
+        },
+        test(){
+            axios.post("http://127.0.0.1:59003/user_api_v1/register",this.postForm)
+                .then(res=>{
+                    console.log(res);
+                    if(parseInt(res.status)==200){
+                        window.location.href = "index"
+                    }
+                })
         }
     },
 }
