@@ -7,16 +7,16 @@
                 <span class="error_tip" v-show="error_name" style="color:red;">{{ error_name_message }}</span>
             </label>
             <label>
-                <input type="text" placeholder="Your Phone Number" name="mobile" id="phone" v-model="phone" @blur="check_phone"/>
-                <span class="error_tip" v-show="error_phone" style="color:red;">{{ error_phone_message }}</span>
-            </label>
-            <label>
                 <input type="password" placeholder="password" name="password" id="pwd" v-model="password" @blur="check_password" />
                 <span class="error_tip" v-show="error_password" style="color:red;">请输入6-12位的密码</span>
             </label>
             <label>
                 <input type="password" name="password2" id="cpwd" v-model="cpwd" @blur="check_cpwd" placeholder="Please confirm your password"/>
                 <span class="error_tip" v-show="error_cpwd" style="color:red;">两次输入的密码不一致</span>
+            </label>
+            <label>
+                <input type="text" placeholder="Your Phone Number" name="mobile" id="phone" v-model="phone" @blur="check_phone"/>
+                <span class="error_tip" v-show="error_phone" style="color:red;">{{ error_phone_message }}</span>
             </label>
             <span style="display:inline-block;color:black">
                 <input style="width:20px;" type="checkbox" name="allow" id="allow" v-model="allow" @change="check_allow">同意"陈cc美瞳馆的用户使用协议"
@@ -26,7 +26,7 @@
             <input type="submit" value="Sign up" @click="on_submit()"/>
             <p class="change_link" style="text-align: center">
                 <span class="text">Already a member ?</span>
-                <router-link to="Index"> Go and log in</router-link>
+                <router-link to="login"> Go and log in</router-link>
             </p>
         </div>
         <ul>
@@ -45,7 +45,10 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import axios from 'axios';
+import AppVue from '../App.vue';
+
 export default {
     name : "Register",
     data() {
@@ -131,13 +134,15 @@ export default {
                     "phone":this.phone
                 }).then(res=>{
                     console.log(res);
-                    // if(parseInt(res.status)==200){
-                    //     console.log(1);
-                    //     window.location.href="Index"
-                    // }
+                    if(res.data.response == "successful"){
+                        this.$router.push('/')
+                    }else if(res.data.response == "failed"){
+                        alert(res.data.data);
+                        location.reload()
+                    }
                 })
             }
-        }
+        },
     },
 }
 </script>

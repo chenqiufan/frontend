@@ -4,9 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import VueDialog from 'vue-dialog';
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
+Vue.use(VueDialog)
 
 /* eslint-disable no-new */
 new Vue({
