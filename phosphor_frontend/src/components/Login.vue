@@ -92,7 +92,16 @@ export default {
             if (this.error_name == true || this.error_password == true || this.error_cpwd == true){
                 window.event.returnValue = false;
             }else{
-                this.$router.push('/')
+                axios.post('http://127.0.0.1:59003/user_api_v1/login',{
+                    "username":this.username,
+                    "password":this.password
+                }).then(res=>{
+                    console.log(res.data);
+                    if(res.data.response == "successful"){
+                        this.$router.push('/')
+                    }
+                })
+                
             }
         },
     },
