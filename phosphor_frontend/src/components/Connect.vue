@@ -1,8 +1,5 @@
 <template>
-    <div>
-        <top></top>
-        <img src="../../static/shop1.jpg"> 
-    </div>
+    <top></top>
 </template>
 
 <script>

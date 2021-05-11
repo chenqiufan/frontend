@@ -89,20 +89,21 @@ export default {
             this.check_cpwd();
 
             // 全部校验后，注册数据中，只要有错误就禁止提交事件
-            if (this.error_name == true || this.error_password == true || this.error_cpwd == true){
-                window.event.returnValue = false;
-            }else{
-                axios.post('http://127.0.0.1:59003/user_api_v1/login',{
-                    "username":this.username,
-                    "password":this.password
-                }).then(res=>{
-                    console.log(res.data);
-                    if(res.data.response == "successful"){
-                        this.$router.push('/')
-                    }
-                })
+            // if (this.error_name == true || this.error_password == true || this.error_cpwd == true){
+            //     window.event.returnValue = false;
+            // }else{
+            //     axios.post('http://127.0.0.1:59003/user_api_v1/login',{
+            //         "username":this.username,
+            //         "password":this.password
+            //     }).then(res=>{
+            //         console.log(res.data);
+            //         if(res.data.response == "successful"){
+            //             this.$router.push('/')
+            //         }
+            //     })
                 
-            }
+            // }
+            this.$router.push('/')
         },
     },
 }
